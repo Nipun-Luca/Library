@@ -9,6 +9,7 @@ function Book(title, author, pages, read) {
 
 const addBookButton = document.getElementById("addBook");
 const addBookForm = document.getElementById("addBookForm");
+const booksContainer = document.querySelector(".books-container");
 
 addBookButton.addEventListener("click", () => {
     // Show the form
@@ -17,43 +18,48 @@ addBookButton.addEventListener("click", () => {
 
 const form = document.querySelector("#addBookForm form");
 form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
     // Get form values
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const pages = parseInt(document.getElementById("pages").value);
     const read = document.getElementById("read").checked;
 
-    // Validate form fields manually
-    if (!title || !author || isNaN(pages)) {
-        alert("Please fill in all required fields.");
-    } else {
-        // Create a new book and add it to the library
-        const book = new Book(title, author, pages, read);
-        myLibrary.push(book);
+    // Create a new book and add it to the library
+    const book = new Book(title, author, pages, read);
+    myLibrary.push(book);
 
-        // Hide the form
-        addBookForm.style.display = "none";
+    // Hide the form
+    addBookForm.style.display = "none";
 
-        // Clear the form inputs
-        form.reset();
+    // Clear the form inputs
+    form.reset();
 
-        // Display the updated library
-        displayBooks();
-    }
-
-    e.preventDefault(); // Prevent the default form submission
+    // Display the updated library
+    displayBooks();
 });
 
 function displayBooks() {
-    const booksContainer = document.querySelector(".books-container");
-
     // Clear the booksContainer
-    booksContainer.innerHTML = "";
+    booksContainer.innerHTML = '';
 
     // Loop through the library and display each book
     myLibrary.forEach(book => {
-        const bookInfo = document.createElement("div");
-        bookInfo.textContent = `Title: ${book.title}, Author: ${book.author}, Pages: ${book.pages}, Read: ${book.read ? 'Yes' : 'No'}`;
-        booksContainer.appendChild(bookInfo);
+        // Create a new div for each book
+        const bookDiv = document.createElement("div");
+        bookDiv.classList.add("book"); // Add the "book" class to the div
+
+        // Create a single line for book properties
+        bookDiv.innerHTML = `
+            <div class="property">Title: ${book.title}</div>
+            <div class="property">Author: ${book.author}</div>
+            <div class="property">Pages: ${book.pages}</div>
+            <div class="property">Read: ${book.read ? 'Yes' : 'No'}</div>
+        `;
+
+        // Append the book div to the booksContainer
+        booksContainer.appendChild(bookDiv);
     });
 }
+

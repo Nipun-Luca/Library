@@ -23,7 +23,20 @@ h1 {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    display: flex; /* Use flexbox to display properties horizontally */
+    justify-content: space-between; /* Add space between properties */
+    align-items: center; /* Vertically center properties */
 }
+
+.property {
+    font-weight: bold;
+    margin-right: 10px; /* Add some spacing between properties */
+}
+
+.value {
+    flex: 1; /* Allow the value to take up remaining space */
+}
+
 
 button#addBook {
     margin: 10px auto; /* Center the button horizontally */
