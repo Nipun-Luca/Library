@@ -9,21 +9,19 @@ function Book(title, author, pages, read) {
 
 const addBookButton = document.getElementById("addBook");
 const addBookForm = document.getElementById("addBookForm");
-const overlay = document.getElementById("overlay"); // Add an overlay element
 
 addBookButton.addEventListener("click", () => {
-    // Show the form and overlay
+    // Show the form
     addBookForm.style.display = "block";
-    overlay.style.display = "block";
 });
 
-// Close the form and overlay when clicking outside of it
-window.onclick = function(event) {
-    if (event.target == overlay) {
+// Close the form when clicking outside of it
+document.addEventListener("click", (event) => {
+    if (!addBookForm.contains(event.target) && event.target !== addBookButton) {
+        // Clicked outside the form, close it
         addBookForm.style.display = "none";
-        overlay.style.display = "none";
     }
-};
+});
 
 const form = document.querySelector("#addBookForm form");
 form.addEventListener("submit", (e) => {
@@ -39,9 +37,8 @@ form.addEventListener("submit", (e) => {
     const book = new Book(title, author, pages, read);
     myLibrary.push(book);
 
-    // Hide the form and overlay
+    // Hide the form
     addBookForm.style.display = "none";
-    overlay.style.display = "none";
 
     // Clear the form inputs
     form.reset();
