@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (other head elements) ... -->
+    <link href="styles.css" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Library</h1>
+    <div class="books-container"></div>
+    <button id="addBook">Add Book</button>
+
+    <!-- Hidden form -->
+    <div id="addBookForm" class="hidden">
+        <form>
+            <label for="title">Title:</label>
+            <input type="text" id="title" required><br>
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" required><br>
+
+            <label for="pages">Pages:</label>
+            <input type="number" id="pages" required><br>
+
+            <label for="read">Read:</label>
+            <input type="checkbox" id="read"><br>
+
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</body>
+</html>

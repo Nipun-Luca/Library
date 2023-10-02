@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr; /* Create a header and content area */
+    grid-template-areas:
+        "header"
+        "content"; /* Define grid areas for header and content */
+    min-height: 100vh;
+}
+
+h1 {
+    grid-area: header; /* Place the header in the "header" grid area */
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.books-container {
+    grid-area: content; /* Place the books container in the "content" grid area */
+    display: grid;
+    grid-template-columns: 1fr; /* Display books vertically, one book per column */
+    gap: 20px; /* Add some spacing between books */
+    padding: 20px;
+}
+
+.book {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button#addBook {
+    grid-area: content; /* Place the "Add Book" button in the "content" grid area */
+    justify-self: center; /* Center the button horizontally */
+    align-self: center; /* Center the button vertically */
+    padding: 10px 20px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+dialog {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    margin-top: 5px;
+}
+
+button[type="submit"] {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#addBookForm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 400px;
+    width: 100%;
+    display: none; /* Initially hidden */
+    z-index: 2; /* On top of the overlay */
+}
+
+.hidden {
+    display: none;
+}
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
