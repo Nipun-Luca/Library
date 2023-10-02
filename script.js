@@ -48,7 +48,7 @@ function displayBooks() {
     const booksContainer = document.querySelector(".books-container");
 
     // Clear the booksContainer
-    booksContainer.innerHTML = '';
+    booksContainer.innerHTML = "";
 
     // Loop through the library and display each book
     myLibrary.forEach(book => {
