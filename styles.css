@@ -1,6 +1,8 @@
 body {
     margin: 0;
     padding: 0;
+    height: 100vh;
+    width: 100%;
 }
 
 h1 {
@@ -13,8 +15,8 @@ h1 {
 
 .books-container {
     display: flex;
-    flex-direction: column; /* Display books vertically */
-    gap: 20px; /* Add some spacing between books */
+    flex-direction: column;
+    gap: 20px;
     padding: 20px;
 }
 
@@ -23,24 +25,20 @@ h1 {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    display: flex; /* Use flexbox to display properties horizontally */
-    justify-content: space-between; /* Add space between properties */
-    align-items: center; /* Vertically center properties */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .property {
     font-weight: bold;
-    margin-right: 10px; /* Add some spacing between properties */
-}
-
-.value {
-    flex: 1; /* Allow the value to take up remaining space */
+    margin-right: 10px;
 }
 
 
 button#addBook {
-    margin: 10px auto; /* Center the button horizontally */
-    display: block; /* Make it a block-level element */
+    margin: 10px auto;
+    display: block;
     padding: 10px 20px;
     background-color: #007acc;
     color: white;

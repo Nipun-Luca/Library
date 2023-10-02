@@ -9,12 +9,21 @@ function Book(title, author, pages, read) {
 
 const addBookButton = document.getElementById("addBook");
 const addBookForm = document.getElementById("addBookForm");
-const booksContainer = document.querySelector(".books-container");
+const overlay = document.getElementById("overlay"); // Add an overlay element
 
 addBookButton.addEventListener("click", () => {
-    // Show the form
+    // Show the form and overlay
     addBookForm.style.display = "block";
+    overlay.style.display = "block";
 });
+
+// Close the form and overlay when clicking outside of it
+window.onclick = function(event) {
+    if (event.target == overlay) {
+        addBookForm.style.display = "none";
+        overlay.style.display = "none";
+    }
+};
 
 const form = document.querySelector("#addBookForm form");
 form.addEventListener("submit", (e) => {
@@ -30,8 +39,9 @@ form.addEventListener("submit", (e) => {
     const book = new Book(title, author, pages, read);
     myLibrary.push(book);
 
-    // Hide the form
+    // Hide the form and overlay
     addBookForm.style.display = "none";
+    overlay.style.display = "none";
 
     // Clear the form inputs
     form.reset();
@@ -41,16 +51,16 @@ form.addEventListener("submit", (e) => {
 });
 
 function displayBooks() {
+    const booksContainer = document.querySelector(".books-container");
+
     // Clear the booksContainer
     booksContainer.innerHTML = '';
 
     // Loop through the library and display each book
     myLibrary.forEach(book => {
-        // Create a new div for each book
         const bookDiv = document.createElement("div");
-        bookDiv.classList.add("book"); // Add the "book" class to the div
+        bookDiv.classList.add("book");
 
-        // Create a single line for book properties
         bookDiv.innerHTML = `
             <div class="property">Title: ${book.title}</div>
             <div class="property">Author: ${book.author}</div>
@@ -58,8 +68,6 @@ function displayBooks() {
             <div class="property">Read: ${book.read ? 'Yes' : 'No'}</div>
         `;
 
-        // Append the book div to the booksContainer
         booksContainer.appendChild(bookDiv);
     });
 }
-
