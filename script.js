@@ -15,31 +15,33 @@ addBookButton.addEventListener("click", () => {
     addBookForm.style.display = "block";
 });
 
-const submitButton = document.querySelector("#addBookForm form button[type='submit']");
-submitButton.addEventListener("click", (e) => {
-    e.preventDefault();
-
+const form = document.querySelector("#addBookForm form");
+form.addEventListener("submit", (e) => {
     // Get form values
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const pages = parseInt(document.getElementById("pages").value);
     const read = document.getElementById("read").checked;
 
-    // Create a new book and add it to the library
-    const book = new Book(title, author, pages, read);
-    myLibrary.push(book);
+    // Validate form fields manually
+    if (!title || !author || isNaN(pages)) {
+        alert("Please fill in all required fields.");
+    } else {
+        // Create a new book and add it to the library
+        const book = new Book(title, author, pages, read);
+        myLibrary.push(book);
 
-    // Hide the form
-    addBookForm.style.display = "none";
+        // Hide the form
+        addBookForm.style.display = "none";
 
-    // Clear the form inputs
-    document.getElementById("title").value = "";
-    document.getElementById("author").value = "";
-    document.getElementById("pages").value = "";
-    document.getElementById("read").checked = false;
+        // Clear the form inputs
+        form.reset();
 
-    // Display the updated library
-    displayBooks();
+        // Display the updated library
+        displayBooks();
+    }
+
+    e.preventDefault(); // Prevent the default form submission
 });
 
 function displayBooks() {
