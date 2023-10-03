@@ -14,28 +14,24 @@
     <button id="addBook">Add Book</button>
     <div class="books-container"></div>
 
-    <!-- Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form>
-                <label for="title">Title:</label>
-                <input type="text" id="title" required><br>
+    <!-- Hidden form -->
+    <dialog id="addBookForm" class="hidden">
+        <form>
+            <label for="title">Title:</label>
+            <input type="text" id="title" required><br>
 
-                <label for="author">Author:</label>
-                <input type="text" id="author" required><br>
+            <label for="author">Author:</label>
+            <input type="text" id="author" required><br>
 
-                <label for="pages">Pages:</label>
-                <input type="number" id="pages" required><br>
+            <label for="pages">Pages:</label>
+            <input type="number" id="pages" required><br>
 
-                <label for="read">Read:</label>
-                <input type="checkbox" id="read"><br>
+            <label for="read">Read:</label>
+            <input type="checkbox" id="read"><br>
 
-                <input type="submit">
-            </form>
-        </div>
-    </div>
-
-    <div id="overlay" class="overlay-dialog"></div>
+            <input type="submit">
+        </form>
+        <button id="closeButton">Close</button>
+    </dialog>
 </body>
 </html>

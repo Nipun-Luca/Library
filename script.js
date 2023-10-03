@@ -8,26 +8,25 @@ function Book(title, author, pages, read) {
 }
 
 const addBookButton = document.getElementById("addBook");
-const modal = document.getElementById("myModal");
-const overlay = document.getElementById("overlay");
-const closeBtn = document.getElementsByClassName("close")[0];
+const addBookForm = document.getElementById("addBookForm");
+const closeButton = document.getElementById("closeButton");
 
-// Display form
 addBookButton.addEventListener("click", () => {
-    modal.style.display = "block";
-    overlay.style.display = "block";
+    addBookForm.showModal();
 });
 
-// Close the form when clicking outside of it or the close button
-overlay.addEventListener("click", closeModal);
-closeBtn.addEventListener("click", closeModal);
+closeButton.addEventListener("click", () => {
+    addBookForm.close();
+});
 
-function closeModal() {
-    modal.style.display = "none";
-    overlay.style.display = "none";
-}
+// Close the dialog when clicking outside of the popup
+window.addEventListener("click", (e) => {
+    if (e.target === addBookForm) {
+        addBookForm.close();
+    }
+});
 
-const form = document.querySelector("#myModal form");
+const form = document.querySelector("#addBookForm form");
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -42,7 +41,7 @@ form.addEventListener("submit", (e) => {
     Library.push(book);
 
     // Hide the form
-    closeModal();
+    addBookForm.close();
 
     // Clear the form inputs
     form.reset();
