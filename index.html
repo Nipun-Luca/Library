@@ -16,24 +16,22 @@
 
     <!-- Hidden form -->
     <dialog id="showForm" class="hidden">
+        <button id="closeButton">X</button>
+        <form>
+            <label for="title">Title</label>
+            <input type="text" id="title" required><br>
 
-            <form>
-                <label for="title">Title:</label>
-                <input type="text" id="title" required><br>
+            <label for="author">Author</label>
+            <input type="text" id="author" required><br>
 
-                <label for="author">Author:</label>
-                <input type="text" id="author" required><br>
+            <label for="pages">Pages</label>
+            <input type="number" id="pages" required><br>
 
-                <label for="pages">Pages:</label>
-                <input type="number" id="pages" required><br>
+            <label for="read">Read</label>
+            <input type="checkbox" id="read"><br>
 
-                <label for="read">Read:</label>
-                <input type="checkbox" id="read"><br>
-
-                <input type="submit">
-            </form>
-            <button id="closeButton">Close</button>
-   
+            <input type="submit">
+        </form>
     </dialog>
 </body>
 </html>

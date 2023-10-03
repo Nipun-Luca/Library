@@ -10,6 +10,7 @@ function Book(title, author, pages, read) {
 const addBookButton = document.getElementById("addBook");
 const showForm = document.getElementById("showForm");
 const closeButton = document.getElementById("closeButton");
+const booksContainer = document.querySelector(".books-container");
 
 addBookButton.addEventListener("click", () => {
     showForm.showModal();
@@ -19,24 +20,18 @@ closeButton.addEventListener("click", () => {
     showForm.close();
 });
 
-
-
-//Reference: https://blog.webdevsimplified.com/2023-04/html-dialog/
-//Close the dialog when clicking outside of the popup
-showForm.addEventListener("click", e => {
-    const dialogDimensions = showForm.getBoundingClientRect()
+// Close the dialog when clicking outside of the popup
+showForm.addEventListener("click", (e) => {
+    const dialogDimensions = showForm.getBoundingClientRect();
     if (
-      e.clientX < dialogDimensions.left ||
-      e.clientX > dialogDimensions.right ||
-      e.clientY < dialogDimensions.top ||
-      e.clientY > dialogDimensions.bottom
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
     ) {
-        showForm.close()
+        showForm.close();
     }
-  })
-//Reference: https://blog.webdevsimplified.com/2023-04/html-dialog/
-
-
+});
 
 const form = document.querySelector("#showForm form");
 form.addEventListener("submit", (e) => {
@@ -58,27 +53,66 @@ form.addEventListener("submit", (e) => {
     // Clear the form inputs
     form.reset();
 
-    displayBooks();
+    // Display the newly added book
+    displayBook(book);
 });
 
+function displayBook(book) {
+    const bookDiv = document.createElement("div");
+    bookDiv.classList.add("book");
+
+    const titleDiv = document.createElement("div");
+    titleDiv.classList.add("property");
+    titleDiv.textContent = `Title: ${book.title}`;
+    bookDiv.appendChild(titleDiv);
+
+    const authorDiv = document.createElement("div");
+    authorDiv.classList.add("property");
+    authorDiv.textContent = `Author: ${book.author}`;
+    bookDiv.appendChild(authorDiv);
+
+    const pagesDiv = document.createElement("div");
+    pagesDiv.classList.add("property");
+    pagesDiv.textContent = `Pages: ${book.pages}`;
+    bookDiv.appendChild(pagesDiv);
+
+    const readDiv = document.createElement("div");
+    readDiv.classList.add("property");
+    const readButton = document.createElement("button");
+    readButton.classList.add("read-toggle");
+    readButton.textContent = book.read ? 'Yes' : 'No';
+    readButton.addEventListener("click", () => {
+        book.read = !book.read;
+        readButton.textContent = book.read ? 'Yes' : 'No';
+    });
+    readDiv.appendChild(readButton);
+    bookDiv.appendChild(readDiv);
+
+    const deleteDiv = document.createElement("div");
+    deleteDiv.classList.add("property");
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-book");
+    deleteButton.textContent = "X";
+    deleteButton.addEventListener("click", () => {
+        const index = Library.indexOf(book);
+        if (index !== -1) {
+            Library.splice(index, 1);
+            booksContainer.removeChild(bookDiv);
+        }
+    });
+    deleteDiv.appendChild(deleteButton);
+    bookDiv.appendChild(deleteDiv);
+
+    booksContainer.appendChild(bookDiv);
+}
+
+// Function to display all books in the Library
 function displayBooks() {
-    const booksContainer = document.querySelector(".books-container");
-
-    // Clear booksContainer
     booksContainer.innerHTML = '';
-
-    // Loop through the library and display each book
-    Library.forEach(book => {
-        const bookDiv = document.createElement("div");
-        bookDiv.classList.add("book");
-
-        bookDiv.innerHTML = `
-            <div class="property">Title: ${book.title}</div>
-            <div class="property">Author: ${book.author}</div>
-            <div class="property">Pages: ${book.pages}</div>
-            <div class="property">Read: ${book.read ? 'Yes' : 'No'}</div>
-        `;
-
-        booksContainer.appendChild(bookDiv);
+    Library.forEach((book) => {
+        displayBook(book);
     });
 }
+
+// Initial display of books
+displayBooks();
