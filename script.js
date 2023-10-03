@@ -1,4 +1,4 @@
-const myLibrary = [];
+const Library = [];
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -8,22 +8,26 @@ function Book(title, author, pages, read) {
 }
 
 const addBookButton = document.getElementById("addBook");
-const addBookForm = document.getElementById("addBookForm");
+const modal = document.getElementById("myModal");
+const overlay = document.getElementById("overlay");
+const closeBtn = document.getElementsByClassName("close")[0];
 
+// Display form
 addBookButton.addEventListener("click", () => {
-    // Show the form
-    addBookForm.style.display = "block";
+    modal.style.display = "block";
+    overlay.style.display = "block";
 });
 
-// Close the form when clicking outside of it
-document.addEventListener("click", (event) => {
-    if (!addBookForm.contains(event.target) && event.target !== addBookButton) {
-        // Clicked outside the form, close it
-        addBookForm.style.display = "none";
-    }
-});
+// Close the form when clicking outside of it or the close button
+overlay.addEventListener("click", closeModal);
+closeBtn.addEventListener("click", closeModal);
 
-const form = document.querySelector("#addBookForm form");
+function closeModal() {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+}
+
+const form = document.querySelector("#myModal form");
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -35,26 +39,25 @@ form.addEventListener("submit", (e) => {
 
     // Create a new book and add it to the library
     const book = new Book(title, author, pages, read);
-    myLibrary.push(book);
+    Library.push(book);
 
     // Hide the form
-    addBookForm.style.display = "none";
+    closeModal();
 
     // Clear the form inputs
     form.reset();
 
-    // Display the updated library
     displayBooks();
 });
 
 function displayBooks() {
     const booksContainer = document.querySelector(".books-container");
 
-    // Clear the booksContainer
+    // Clear booksContainer
     booksContainer.innerHTML = '';
 
     // Loop through the library and display each book
-    myLibrary.forEach(book => {
+    Library.forEach(book => {
         const bookDiv = document.createElement("div");
         bookDiv.classList.add("book");
 
