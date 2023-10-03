@@ -8,7 +8,7 @@ function Book(title, author, pages, read) {
 }
 
 const addBookButton = document.getElementById("addBook");
-const addBookForm = document.getElementById("addBookForm");
+const addBookForm = document.getElementById("showForm");
 const closeButton = document.getElementById("closeButton");
 
 addBookButton.addEventListener("click", () => {
@@ -26,7 +26,7 @@ window.addEventListener("click", (e) => {
     }
 });
 
-const form = document.querySelector("#addBookForm form");
+const form = document.querySelector("#showForm #formContainer form");
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
