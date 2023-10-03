@@ -48,8 +48,8 @@ button#addBook {
 
 /* Dialog */
 dialog {
-    padding: 0;
     border-radius: 5px;
+    padding: 20px;
 }
 
 
@@ -58,7 +58,6 @@ form {
     display: grid;
     gap: 10px;
     width: 20rem;
-    padding: 20px;
 }
 
 label {

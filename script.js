@@ -8,25 +8,37 @@ function Book(title, author, pages, read) {
 }
 
 const addBookButton = document.getElementById("addBook");
-const addBookForm = document.getElementById("showForm");
+const showForm = document.getElementById("showForm");
 const closeButton = document.getElementById("closeButton");
 
 addBookButton.addEventListener("click", () => {
-    addBookForm.showModal();
+    showForm.showModal();
 });
 
 closeButton.addEventListener("click", () => {
-    addBookForm.close();
+    showForm.close();
 });
 
-// Close the dialog when clicking outside of the popup
-window.addEventListener("click", (e) => {
-    if (e.target === addBookForm) {
-        addBookForm.close();
+
+
+//Reference: https://blog.webdevsimplified.com/2023-04/html-dialog/
+//Close the dialog when clicking outside of the popup
+showForm.addEventListener("click", e => {
+    const dialogDimensions = showForm.getBoundingClientRect()
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+        showForm.close()
     }
-});
+  })
+//Reference: https://blog.webdevsimplified.com/2023-04/html-dialog/
 
-const form = document.querySelector("#showForm #formContainer form");
+
+
+const form = document.querySelector("#showForm form");
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -41,7 +53,7 @@ form.addEventListener("submit", (e) => {
     Library.push(book);
 
     // Hide the form
-    addBookForm.close();
+    showForm.close();
 
     // Clear the form inputs
     form.reset();
