@@ -8,11 +8,21 @@
     <link href="styles.css" rel="stylesheet">
     <script src="script.js" defer></script>
 </head>
-
 <body>
     <h1>Library</h1>
     <button id="addBook">Add Book</button>
-    <div class="books-container"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Read</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="books-container"></tbody>
+    </table>
 
     <!-- Hidden form -->
     <dialog id="showForm" class="hidden">

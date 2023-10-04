@@ -1,10 +1,12 @@
 const Library = [];
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 }
 
 const addBookButton = document.getElementById("addBook");
@@ -20,7 +22,6 @@ closeButton.addEventListener("click", () => {
     showForm.close();
 });
 
-// Close the dialog when clicking outside of the popup
 showForm.addEventListener("click", (e) => {
     const dialogDimensions = showForm.getBoundingClientRect();
     if (
@@ -53,65 +54,36 @@ form.addEventListener("submit", (e) => {
     // Clear the form inputs
     form.reset();
 
-    // Display the newly added book
-    displayBook(book);
+    // Display the books in the table
+    displayBooks();
 });
 
-function displayBook(book) {
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book");
+function displayBooks() {
+    // Clear the existing rows
+    while (booksContainer.firstChild) {
+        booksContainer.removeChild(booksContainer.firstChild);
+    }
 
-    const titleDiv = document.createElement("div");
-    titleDiv.classList.add("property");
-    titleDiv.textContent = `Title: ${book.title}`;
-    bookDiv.appendChild(titleDiv);
-
-    const authorDiv = document.createElement("div");
-    authorDiv.classList.add("property");
-    authorDiv.textContent = `Author: ${book.author}`;
-    bookDiv.appendChild(authorDiv);
-
-    const pagesDiv = document.createElement("div");
-    pagesDiv.classList.add("property");
-    pagesDiv.textContent = `Pages: ${book.pages}`;
-    bookDiv.appendChild(pagesDiv);
-
-    const readDiv = document.createElement("div");
-    readDiv.classList.add("property");
-    const readButton = document.createElement("button");
-    readButton.classList.add("read-toggle");
-    readButton.textContent = book.read ? 'Yes' : 'No';
-    readButton.addEventListener("click", () => {
-        book.read = !book.read;
-        readButton.textContent = book.read ? 'Yes' : 'No';
+    // Loop through the library and display each book as a table row
+    Library.forEach((book, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.pages}</td>
+            <td>${book.read ? 'Yes' : 'No'}</td>
+            <td><button onclick="deleteBook(${index})">Delete</button></td>
+        `;
+        booksContainer.appendChild(row);
     });
-    readDiv.appendChild(readButton);
-    bookDiv.appendChild(readDiv);
-
-    const deleteDiv = document.createElement("div");
-    deleteDiv.classList.add("property");
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("delete-book");
-    deleteButton.textContent = "X";
-    deleteButton.addEventListener("click", () => {
-        const index = Library.indexOf(book);
-        if (index !== -1) {
-            Library.splice(index, 1);
-            booksContainer.removeChild(bookDiv);
-        }
-    });
-    deleteDiv.appendChild(deleteButton);
-    bookDiv.appendChild(deleteDiv);
-
-    booksContainer.appendChild(bookDiv);
 }
 
-// Function to display all books in the Library
-function displayBooks() {
-    booksContainer.innerHTML = '';
-    Library.forEach((book) => {
-        displayBook(book);
-    });
+function deleteBook(index) {
+    // Remove the book from the library
+    Library.splice(index, 1);
+    
+    // Update the displayed books
+    displayBooks();
 }
 
 // Initial display of books
