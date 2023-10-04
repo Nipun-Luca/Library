@@ -3,7 +3,6 @@ body {
     padding: 0;
     min-height: 100vh;
     width: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,16 +17,14 @@ h1 {
     padding: 20px;
     margin: 0;
     width: 100%;
-    box-sizing: border-box; /* Add this line */
-    position: relative; /* Add this line */
+    box-sizing: border-box;
+    position: relative;
 }
 
 /* Table Styling */
 table {
-    width: 95%;
-    max-width: 95%;
+    width: 90%;
     border-collapse: collapse;
-    table-layout: fixed;
 }
 
 thead {
@@ -40,8 +37,8 @@ thead {
 thead th {
     padding: 10px;
     border-bottom: 1px solid #ccc;
-    word-break: normal; /* Prevent word break */
-    white-space: nowrap; /* Prevent wrapping */
+    word-break: normal;
+    white-space: nowrap;
 }
 
 thead th, tbody td {
@@ -51,26 +48,25 @@ thead th, tbody td {
 }
 
 thead th:nth-child(1), tbody td:nth-child(1) {
-    min-width: 150px; /* Set a minimum width */
+    min-width: 150px;
 }
 
 thead th:nth-child(2), tbody td:nth-child(2) {
-    min-width: 150px; /* Set a minimum width */
+    min-width: 150px;
 }
 
 thead th:nth-child(3), tbody td:nth-child(3) {
-    min-width: 100px; /* Set a minimum width */
+    min-width: 100px;
 }
 
 thead th:nth-child(4), tbody td:nth-child(4),
 thead th:nth-child(5), tbody td:nth-child(5) {
-    width: 60px; /* Set a fixed width for the last two columns */
+    width: 60px;
 }
 
 tbody tr:last-child td {
     border-bottom: none;
 }
-
 
 /* Add Book Button */
 button#addBook {
@@ -128,4 +124,19 @@ input[type="submit"] {
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+}
+
+/* Read/Unread Button Styles */
+.read {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+}
+
+.unread {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
 }

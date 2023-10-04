@@ -71,20 +71,43 @@ function displayBooks() {
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.pages}</td>
-            <td>${book.read ? 'Yes' : 'No'}</td>
-            <td><button onclick="deleteBook(${index})">Delete</button></td>
+            <td><button class="read-button" data-index="${index}">${book.read ? 'Read' : 'Unread'}</button></td>
+            <td><button onclick="deleteBook(${index})">X</button></td>
         `;
+
+        // Add event listener to the read button
+        const readButton = row.querySelector('.read-button');
+        readButton.addEventListener('click', () => toggleReadStatus(index));
+
+        // Style the read button
+        if (book.read) {
+            readButton.classList.add('read');
+        } else {
+            readButton.classList.add('unread');
+        }
+
         booksContainer.appendChild(row);
     });
+}
+
+function toggleReadStatus(index) {
+    // Toggle the read status for the book at the given index
+    Library[index].read = !Library[index].read;
+
+    // Update the displayed books
+    displayBooks();
 }
 
 function deleteBook(index) {
     // Remove the book from the library
     Library.splice(index, 1);
-    
+
     // Update the displayed books
     displayBooks();
 }
 
 // Initial display of books
 displayBooks();
+
+// Handle window resize
+window.addEventListener('resize', displayBooks);
