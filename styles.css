@@ -16,7 +16,7 @@ h1 {
     text-align: center;
     padding: 20px;
     margin: 0;
-    width: 100%;
+    min-width: 100%;
     box-sizing: border-box;
     position: relative;
 }
@@ -56,16 +56,23 @@ thead th:nth-child(2), tbody td:nth-child(2) {
 }
 
 thead th:nth-child(3), tbody td:nth-child(3) {
-    min-width: 100px;
+    min-width: 70%;
 }
 
 thead th:nth-child(4), tbody td:nth-child(4),
 thead th:nth-child(5), tbody td:nth-child(5) {
-    width: 60px;
+    width: 70px;
 }
 
 tbody tr:last-child td {
     border-bottom: none;
+}
+
+.delete {
+    background-color: #00609f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
 }
 
 /* Add Book Button */
